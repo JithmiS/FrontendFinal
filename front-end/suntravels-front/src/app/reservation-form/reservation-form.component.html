@@ -1,0 +1,108 @@
+<div style="padding-right:55px;" class="container">
+
+  <!-- form header -->
+  <div class="row">
+    <div class="col">
+      <h3>RESERVATION FORM</h3>
+      <hr>
+    </div>
+  </div>
+
+  <!-- main form -->
+  <div class="row" style="padding: 40px;">
+    <form action="" style="width:100%;" [formGroup]="reservationForm" style="background-color:#e6f3ff; padding: 20px;">
+      <div class="col">
+
+        <!-- personal info -->
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="cidText">Check In Date</label>
+              <input type="date" formControlName="check_in_date" [ngClass]="{'form-control': true,
+              'is-invalid': check_in_date.invalid && check_in_date.touched,
+              'is-valid': check_in_date.valid}" id="cidText" placeholder="Enter check_in_date">
+              <small id="fnHelp" *ngIf="check_in_date.errors?.required && check_in_date.touched" class="form-text custom-invalid-feedback">Field is required</small>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="nightsText">Number of nights</label>
+              <input type="number" formControlName="no_of_nights" [ngClass]="{'form-control': true,
+              'is-invalid': no_of_nights.invalid && no_of_nights.touched,
+              'is-valid': no_of_nights.valid}" id="nightsText" placeholder="Enter no_of_nights">
+              <small id="fnHelp" *ngIf="no_of_nights.errors?.required && no_of_nights.touched" class="form-text custom-invalid-feedback">Field is required</small>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- seperator -->
+        <div class="row">
+          <div class="col">
+            <hr>
+          </div>
+        </div>
+
+
+        <!-- address form portion -->
+        <div class="row" formArrayName="search">
+          <div class="col-12" *ngFor="let group of searchArray.controls; let i = index;" [formGroupName]="i">
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-8">
+                    <h4>Room Search {{i+1}}</h4>
+                  </div>
+                  <div class="col-4 control-buttons">
+                    <img src="/assets/icons/add.svg" alt="" (click)="addSearch()">
+                    <img src="/assets/icons/remove.svg" alt="" width="24" height="24" (click)="removeSearch(i)">
+                  </div>
+                </div>
+                <hr>
+              </div>
+              
+              <div class="col-12">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="no_of_rooms">No. of rooms</label>
+                      <input type="number" formControlName="no_of_rooms" [ngClass]="{'form-control': true,
+                      'is-invalid': group.controls.no_of_rooms.invalid && group.controls.no_of_rooms.touched,
+                      'is-valid':  group.controls.no_of_rooms.valid}" id="no_of_rooms" placeholder="Enter no. of rooms">
+                      <small *ngIf="group.controls.no_of_rooms.errors?.required && group.controls.no_of_rooms.touched" class="form-text custom-invalid-feedback">Field is required</small>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="max_adults">Max no. of adults</label>
+                      <input type="number" formControlName="max_adults" [ngClass]="{'form-control': true,
+                      'is-invalid': group.controls.max_adults.invalid && group.controls.max_adults.touched,
+                      'is-valid':  group.controls.max_adults.valid}" id="max_adults" placeholder="Enter max_adults">
+                      <small *ngIf="group.controls.max_adults.errors?.required && group.controls.max_adults.touched" class="form-text custom-invalid-feedback">Field is required</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- seperator -->
+        <div class="row">
+          <div class="col">
+            <hr>
+          </div>
+        </div>
+
+        <!-- final action buttons -->
+        <div class="row justify-content-center">
+          <div class="col-2">
+            <a routerLink="reservation" class="btn btn-primary active" role="button" routerLinkActive="active" (click)="submitSearch()">Search</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
